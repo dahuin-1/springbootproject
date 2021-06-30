@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="fragments/common :: head('게시판')">
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,11 +11,11 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link href="cover.css" th:href="@{/cover.css}" rel="stylesheet">
 
-  <title>게시판</title>
+  <title>안녕</title>
 
 </head>
 <body>
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" th:replace="fragments/common :: menu">
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" th:replace="fragments/common :: menu('board')">
   <!--&lt;!&ndash;  <div class="container-fluid">&ndash;&gt;
       <a class="navbar-brand" href="#">SpringBoot tutorial</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
@@ -36,15 +36,13 @@
 </nav>
 
 <!-- Begin page content -->
-<main role = "main" class="container">
-  <div class = "starter-template">
-    <h1>게시판</h1>
 
+  <div class = "container">
+    <h2>게시판</h2>
   </div><!--
   <p class="lead">
     <a href="#" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Learn more</a>
   </p>-->
-</main>
 
 <!-- Optional JavaScript; choose one of the two! -->
 

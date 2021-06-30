@@ -1,6 +1,6 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="fragments/common :: head('hello, springboot!')">
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,7 +16,7 @@
 </head>
 <body>
   <!-- Fixed navbar -->
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" th:replace="fragments/common :: menu">
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" th:replace="fragments/common :: menu('home')">
   <!--&lt;!&ndash;  <div class="container-fluid">&ndash;&gt;
       <a class="navbar-brand" href="#">SpringBoot tutorial</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
@@ -42,10 +42,7 @@
     <h1>spring boot 다흰</h1>
   <p class="lead">스프링 부트를 이용해서 웹페이지를 제작 <br>
   spring security, jpa 이용</p>
-  </div><!--
-  <p class="lead">
-    <a href="#" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Learn more</a>
-  </p>-->
+  </div>
 </main>
 
 <!-- Optional JavaScript; choose one of the two! -->
