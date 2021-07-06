@@ -25,4 +25,10 @@ public class BoardController {
         return "board/list";
     }
 
+    @GetMapping("/form")
+    public String form(Model model) {
+        return "board/form";
+    }
+
+
 }
