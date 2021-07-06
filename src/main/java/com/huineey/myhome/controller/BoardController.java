@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
-//보드 컨투롤러를 호출하게 되면, 데이터 값이 넘어간다.
+//board를 웹에서 클릭해서 보드 컨투롤러를 호출하게 되면, 데이터 값이 넘어간다. 여기서는 21번째 라인
 @Controller
 @RequestMapping("/board")
 public class BoardController {
@@ -21,7 +21,7 @@ public class BoardController {
     public String list(Model model) { //모델이 넘어간다.
 
         List<Board> boards = boardRepository.findAll();
-        model.addAttribute("boards", boards); //보즈라는 키값에 보즈를 줍니다.
+        model.addAttribute("boards", boards); //boards라는 키값에 boards를 줍니다.
         return "board/list";
     }
 
