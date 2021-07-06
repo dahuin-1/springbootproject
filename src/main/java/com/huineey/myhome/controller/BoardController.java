@@ -18,7 +18,7 @@ public class BoardController {
     private BoardRepository boardRepository; //보드 레파지토리를 이용해서 값을 넘긴다.
 
     @GetMapping("/list")
-    public String list(Model model) { //모델이 넘어간다.
+    public String list(Model model) { //데이터값을 추가하고 싶을 때 파라미터로 모델 넘김
 
         List<Board> boards = boardRepository.findAll();
         model.addAttribute("boards", boards); //boards라는 키값에 boards를 줍니다.
