@@ -2,6 +2,7 @@ package com.huineey.myhome.controller;
 
 import com.huineey.myhome.model.Board;
 import com.huineey.myhome.repository.BoardRepository;
+import com.huineey.myhome.validator.BoardValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,8 +16,11 @@ import java.util.List;
 @RequestMapping("/board")
 public class BoardController {
 
-    @Autowired //디펜던시 인젝션이 일어나고 서버기동될때 인스턴스가 넘어간다.
+    @Autowired //디펜던시 인젝션을 이용하기 위해서! 서버기동될때 인스턴스가 넘어간다.
     private BoardRepository boardRepository; //보드 레파지토리를 이용해서 값을 넘긴다.
+
+    @Autowired //스프링 기동될때 인스턴스가 담김
+    private BoardValidator boardValidator;
 
     @GetMapping("/list")
     public String list(Model model) { //데이터값을 추가하고 싶을 때 파라미터로 모델 넘김
@@ -41,6 +45,7 @@ public class BoardController {
 
     @PostMapping("/form")
     public String gettingSubmit(@Valid Board board, BindingResult bindingResult) {
+        boardValidator.validate(board, bindingResult);
         if(bindingResult.hasErrors()){
             return "board/form";
         }
