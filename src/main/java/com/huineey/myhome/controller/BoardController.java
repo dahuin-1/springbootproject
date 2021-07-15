@@ -5,11 +5,10 @@ import com.huineey.myhome.repository.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 //board를 웹에서 클릭해서 보드 컨투롤러를 호출하게 되면, 데이터 값이 넘어간다. 여기서는 21번째 라인
 @Controller
@@ -27,13 +26,24 @@ public class BoardController {
     }
 
     @GetMapping("/form")
-    public String form(Model model) {
-        model.addAttribute("board", new Board());
+    public String form(Model model, @RequestParam(required = false) Long id) {
+        //(required = false) 필수인지 아닌지, 새글을 작성할때는 파라미터가 필요 없다
+        if(id == null){
+            model.addAttribute("board", new Board());
+            //아이디가 null이면 새 보드 클래스를 생성해서 form에 넘김
+        } else {
+            Board board = boardRepository.findById(id).orElse(null);
+            //boardRepository 에서 아이디로 값을 찾아서 넘긴다. 아이디가 없으면 null을 넘긴다.
+            model.addAttribute("board", board);
+        }
         return "board/form";
     }
 
     @PostMapping("/form")
-    public String gettingSubmit(@ModelAttribute Board board) {
+    public String gettingSubmit(@Valid Board board, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            return "board/form";
+        }
         boardRepository.save(board);
         /*
         ㅇㅏ이디의 키값이 있으면 업데이트
