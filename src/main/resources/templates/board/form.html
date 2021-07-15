@@ -22,14 +22,17 @@
 
   <div class = "container">
     <h2>게시판</h2>
-    <form>
-      <div class="mb-3">
-        <label for="title" class="form-label">제목</label>
-        <input type="email" class="form-control" id="title">
+    <form action="#" th:action="@{/board/form}" th:object="${board}" method="post">
+      <!--엑션은 포스트 요청을 해야하는 속성인 board/form
+       오브젝트는 겟 매핑에서 전달받은 보드-->
+      <div class="form-group">
+        <label for="title">제목</label>
+        <input type="text" class="form-control" id="title" th:field="*{title}">
+        <!-- th:field="*{title} 어떤 속성을 사용해야 할지. 타이틀을 사용해야함-->
       </div>
       <div class="form-group">
         <label for="content">내용</label>
-        <textarea class="form-control" id="content" rows="3"></textarea>
+        <textarea class="form-control" id="content" rows="3" th:field="*{content}"></textarea>
       </div>
       <div class="text-right">
         <a type="button" class="btn btn-dark" th:href="@{/board/list}">취소</a>
