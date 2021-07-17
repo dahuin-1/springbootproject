@@ -4,6 +4,9 @@ import com.huineey.myhome.model.Board;
 import com.huineey.myhome.repository.BoardRepository;
 import com.huineey.myhome.validator.BoardValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,9 +26,13 @@ public class BoardController {
     private BoardValidator boardValidator;
 
     @GetMapping("/list")
-    public String list(Model model) { //데이터값을 추가하고 싶을 때 파라미터로 모델 넘김
-        List<Board> boards = boardRepository.findAll();
+    public String list(Model model, Pageable pageable) { //데이터값을 추가하고 싶을 때 파라미터로 모델 넘김
+        Page<Board> boards = boardRepository.findAll(pageable);
+        int startPage = Math.max(0, boards.getPageable().getPageNumber() - 4);
+        int endPage = Math.min(boards.getTotalPages(), boards.getPageable().getPageNumber() + 4);
         model.addAttribute("boards", boards); //키값에 boards를 줍니다.
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
         return "board/list";
     }
 
