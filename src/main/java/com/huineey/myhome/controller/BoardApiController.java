@@ -22,18 +22,14 @@ class BoardApiController {
         if(StringUtils.isEmpty(title) && StringUtils.isEmpty(content)) {
             return repository.findAll();
         }
-        else{
-            return repository.findByTitleOrContent(title, content);
-        }
+        return repository.findByTitleOrContent(title, content);
     }
-    // end::get-aggregate-root[]
 
     @PostMapping("/boards")
     Board newBoard(@RequestBody Board newBoard) {
         return repository.save(newBoard);
     }
 
-    // Single item
 
     @GetMapping("/boards/{id}")
     Board one(@PathVariable Long id) {
