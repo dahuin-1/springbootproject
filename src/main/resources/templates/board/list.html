@@ -23,6 +23,19 @@
   <div class = "container">
     <h2>게시판</h2>
     <div>총 건수 : <span th:text="${boards.getTotalElements()}"> </span></div>
+    <form class="row g-3">
+      <div class="col-auto">
+        <label for="staticEmail2" class="visually-hidden">Email</label>
+        <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="email@example.com">
+      </div>
+      <div class="col-auto">
+        <label for="inputPassword2" class="visually-hidden">Password</label>
+        <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-primary mb-3">Confirm identity</button>
+      </div>
+    </form>
     <table class="table">
       <thead>
       <tr>
@@ -38,16 +51,19 @@
         <td><a th:text="${board.title}"th:href="@{/board/form(id=${board.id})}">Otto</a></td>
         <td>홍길동</td>
       </tr>
+      </tbody>
     </table>
     <nav aria-label="Page navigation example">
       <ul class="pagination justify-content-center">
-        <li class="page-item disabled">
-          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+        <li class="page-item" th:classappend="${1 == boards.pageable.pageNumber + 1} ? 'disabled'">
+          <a class="page-link" href="#" th:href="@{/board/list(page=${boards.pageable.pageNumber - 1})}" tabindex="-1" aria-disabled="true">Previous</a>
         </li>
-        <li class="page-item" th:each="i : ${#numbers.sequence(startPage, endPage)}">
-          <a class="page-link" th:text="${i+1}" th:href="@{/board/list/(page =${i})}"></a></li>
-        <li class="page-item">
-          <a class="page-link" href="#">Next</a>
+        <li class="page-item" th:classappend="${i == boards.pageable.pageNumber + 1} ? 'disabled'" th:each="i : ${#numbers.sequence(startPage, endPage)}">
+          <a class="page-link" herf = "#" th:href="@{/board/list(page=${i - 1})}" th:text="${i}">1</a>
+        </li>
+        <!--th:href="@{/board/list/(page =${i})}"></a></li-->
+        <li class="page-item" th:classappend="${boards.totalPages == boards.pageable.pageNumber + 1} ? 'disabled'">
+          <a class="page-link" href="#" th:href="@{/board/list(page=${boards.pageable.pageNumber + 1})}">Next</a>
         </li>
       </ul>
     </nav>
