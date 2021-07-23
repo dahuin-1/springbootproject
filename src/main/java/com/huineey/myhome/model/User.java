@@ -1,10 +1,9 @@
 package com.huineey.myhome.model;
 
 import lombok.Data;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -19,6 +18,12 @@ public class User {
     private String password;
     private Boolean enabled;
 
-    //private List<String> roles;
+    @ManyToMany
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private List<Role> roles = new ArrayList<>();
 
 }
