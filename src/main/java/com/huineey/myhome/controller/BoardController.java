@@ -2,11 +2,15 @@ package com.huineey.myhome.controller;
 
 import com.huineey.myhome.model.Board;
 import com.huineey.myhome.repository.BoardRepository;
+import com.huineey.myhome.service.BoardService;
 import com.huineey.myhome.validator.BoardValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +25,9 @@ public class BoardController {
 
     @Autowired //디펜던시 인젝션을 이용하기 위해서! 서버기동될때 인스턴스가 넘어간다.
     private BoardRepository boardRepository; //보드 레파지토리를 이용해서 값을 넘긴다.
+
+    @Autowired
+    private BoardService boardService; //보드 레파지토리를 이용해서 값을 넘긴다.
 
     @Autowired //스프링 기동될때 인스턴스가 담김
     private BoardValidator boardValidator;
@@ -54,12 +61,15 @@ public class BoardController {
     }
 
     @PostMapping("/form")
-    public String gettingSubmit(@Valid Board board, BindingResult bindingResult) {
+    public String postForm(@Valid Board board, BindingResult bindingResult, Authentication authentication) {
         boardValidator.validate(board, bindingResult);
         if(bindingResult.hasErrors()){
             return "board/form";
         }
-        boardRepository.save(board);
+        //Authentication a = SecurityContextHolder.getContext().getAuthentication(); 컨트롤러가 아닌 서비스 클래스에선 이렇게
+        String username = authentication.getName();
+        boardService.save(username, board);
+    //    boardRepository.save(board);
         /*
         ㅇㅏ이디의 키값이 있으면 업데이트
         없으면 인서트
