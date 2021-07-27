@@ -1,6 +1,7 @@
 package com.huineey.myhome.controller;
 
 
+import com.huineey.myhome.model.Board;
 import com.huineey.myhome.model.User;
 import com.huineey.myhome.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,10 @@ class UserApiController {
                 .map(user -> {
                  /*   user.setTitle(newUser.getTitle());
                     user.setContent(newUser.getContent());*/
+                    user.setBoards(newUser.getBoards());
+                    for(Board board : user.getBoards()){
+                        board.setUser(user);
+                    }
                     return repository.save(user);
                 })
                 .orElseGet(() -> {
