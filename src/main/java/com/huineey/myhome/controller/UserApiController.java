@@ -4,14 +4,15 @@ package com.huineey.myhome.controller;
 import com.huineey.myhome.model.Board;
 import com.huineey.myhome.model.User;
 import com.huineey.myhome.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.thymeleaf.util.StringUtils;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@Slf4j
 class UserApiController {
 
     @Autowired
@@ -21,7 +22,9 @@ class UserApiController {
     List<User> all() {
         List<User> users = repository.findAll();
         //return repository.findAll();
-        users.get(0).getBoards().size();
+        log.debug("getBoards().size() 호출전");
+        log.debug("getBoards().size() : {}",users.get(0).getBoards().size());
+        log.debug("getBoards().size() 호출후");
         return users;
     }
 
