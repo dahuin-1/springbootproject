@@ -1,5 +1,5 @@
-#게시판
-###SpringBoot, MariaDB, JPA, spring security, BootStrap 사용
+# 게시판
+### SpringBoot, MariaDB, JPA, spring security, BootStrap 사용
 
 회원관리와 게시글 관리를 위한 테이블은 총 네 가지를 사용합니다.
 
@@ -43,6 +43,10 @@ User의 권한에 따라서 기능을 다르게 부여했습니다.
 <img width="1439" alt="7" src="https://user-images.githubusercontent.com/33304967/127768497-0c30fd54-a728-4f57-a6c2-88e5743e81d7.png">
 
 ROLE_ADMIN 권한을 가진 User에 의해서 삭제가 이루어집니다.
+
+<검색>
+
+
 
 
 
