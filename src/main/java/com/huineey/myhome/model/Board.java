@@ -24,5 +24,4 @@ public class Board {
     @JoinColumn(name = "user_id", referencedColumnName = "id") //어떤 칼럼과 유저 테이블이 연결이 될지
     @JsonIgnore
     private User user;
-
 }
