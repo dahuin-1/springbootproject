@@ -22,9 +22,6 @@ class UserApiController {
     List<User> all() {
         List<User> users = repository.findAll();
         //return repository.findAll();
-        log.debug("getBoards().size() 호출전");
-        log.debug("getBoards().size() : {}",users.get(0).getBoards().size());
-        log.debug("getBoards().size() 호출후");
         return users;
     }
 
