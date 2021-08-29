@@ -1,7 +1,9 @@
 package com.huineey.myhome.controller;
 
 import com.huineey.myhome.model.Board;
+import com.huineey.myhome.model.Comment;
 import com.huineey.myhome.repository.BoardRepository;
+import com.huineey.myhome.repository.CommentRepository;
 import com.huineey.myhome.service.BoardService;
 import com.huineey.myhome.validator.BoardValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 //board를 웹에서 클릭해서 보드 컨투롤러를 호출하게 되면, 데이터 값이 넘어간다. 여기서는 21번째 라인
 @Controller
@@ -25,6 +28,9 @@ public class BoardController {
 
     @Autowired //디펜던시 인젝션을 이용하기 위해서! 서버기동될때 인스턴스가 넘어간다.
     private BoardRepository boardRepository; //보드 레파지토리를 이용해서 값을 넘긴다.
+
+    @Autowired
+    private CommentRepository commentRepository;
 
     @Autowired
     private BoardService boardService; //보드 레파지토리를 이용해서 값을 넘긴다.
@@ -54,8 +60,10 @@ public class BoardController {
             //아이디가 null이면 새 보드 클래스를 생성해서 form에 넘김
         } else {
             Board board = boardRepository.findById(id).orElse(null);
+            List<Comment> comments = commentRepository.findCommentsByBoard(board);
             //boardRepository 에서 아이디로 값을 찾아서 넘긴다. 아이디가 없으면 null을 넘긴다.
             model.addAttribute("board", board);
+            model.addAttribute("comments",comments);
         }
         return "board/form";
     }

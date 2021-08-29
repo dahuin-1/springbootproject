@@ -29,7 +29,7 @@ public class CommentController {
     @Autowired
     CommentRepository commentRepository;
 
-  //  @CrossOrigin(origins = "*", allowedHeaders = "*")
+    //  @CrossOrigin(origins = "*", allowedHeaders = "*")
  /*   @GetMapping("/comments/{id}")
     List<Comment> getBoardComments(@PathVariable Long id) {
         System.out.println("hello");
@@ -38,14 +38,25 @@ public class CommentController {
     }*/
 
     @GetMapping("/comments")
-    List<Comment> all (@RequestParam(required = false, defaultValue = "") String content) {
-            if(StringUtils.isEmpty(content)) {
-                return commentRepository.findAll();
-            }
-            return commentRepository.findCommentByContent(content);
+    List<Comment> all(@RequestParam(required = false, defaultValue = "") String content) {
+        if (StringUtils.isEmpty(content)) {
+            return commentRepository.findAll();
         }
+        return commentRepository.findCommentByContent(content);
     }
 
+    @PostMapping("/comments/{id}")
+    Comment CreateComment(@RequestParam String comment, @PathVariable Long id, Authentication authentication) {
+        //validation
+        Board board = boardRepository.findOneById(id);
+        String username = authentication.getName();
+        Comment newComment = new Comment();
+        newComment.setBoard(board);
+        newComment.setContent(comment);
+        newComment.setWriter(username);
+        return commentRepository.save(newComment);
+    }
+}
 
   /*  @GetMapping("/boards/{id}")
     public String list(Model model,@PathVariable Long id, @PathVariable Long commentID) {

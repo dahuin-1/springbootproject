@@ -18,14 +18,6 @@ public class Comment {
     @JoinColumn(name = "board_id", referencedColumnName = "id")
     private Board board;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getContent() {
         return content;
     }
@@ -42,27 +34,8 @@ public class Comment {
         this.writer = writer;
     }
 
-    public Board getBoard() {
-        return board;
-    }
-
     public void setBoard(Board board) {
         this.board = board;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if(this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Comment comment = (Comment) o;
-        return Objects.equals(id, comment.id) &&
-                Objects.equals(content, comment.content) &&
-                Objects.equals(writer, comment.writer);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, content, writer);
     }
 
 }
