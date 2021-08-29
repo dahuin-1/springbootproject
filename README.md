@@ -78,7 +78,6 @@
 - ROLE_ADMIN 권한을 가진 User에 의해서 삭제가 이루어집니다.
 
 
-
 <검색>
 
     @GetMapping("/boards")
@@ -93,5 +92,24 @@
 <img width="1433" alt="스크린샷 2021-08-01 오후 8 17 52" src="https://user-images.githubusercontent.com/33304967/127768893-84d2a3d4-5c84-4fbb-83d1-5662b72cd852.png">
 
 - 제목이나 내용에 searchText를 가지고 있는 게시물을 리턴합니다.
+
+
+<댓글>
+
+<img width="343" alt="스크린샷 2021-08-29 오후 7 45 33" src="https://user-images.githubusercontent.com/33304967/131247599-4602c188-1534-48f5-bf8b-f07f907d3316.png">
+
+2021년 8월 29일, 댓글 기능을 추가하였습니다.
+
+
+<img width="794" alt="스크린샷 2021-08-29 오후 7 37 06" src="https://user-images.githubusercontent.com/33304967/131247494-0c30a183-e030-430a-aba7-87fff106707e.png">
+
+- 댓글달기 버튼을 누르면 댓글 창이 활성화됩니다.
+
+<img width="794" alt="스크린샷 2021-08-29 오후 7 39 04" src="https://user-images.githubusercontent.com/33304967/131247496-b7480736-f303-49d8-a135-797805c46f6f.png">
+<img width="794" alt="스크린샷 2021-08-29 오후 7 39 13" src="https://user-images.githubusercontent.com/33304967/131247498-b0bfffa7-8885-4e3f-934d-26db03d96d99.png">
+
+- 작성 버튼을 누르면 댓글을 남길 수 있습니다.
+
+<img width="573" alt="스크린샷 2021-08-29 오후 7 46 42" src="https://user-images.githubusercontent.com/33304967/131247637-7b332698-6603-493b-adce-9a25a02d98e6.png">
 
 
